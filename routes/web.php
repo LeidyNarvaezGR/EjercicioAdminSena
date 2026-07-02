@@ -1,6 +1,11 @@
 <?php
 
+
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ComputerController;
+use App\Http\Controllers\TrainingCenterController;
+use App\Http\Controllers\AreaController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +18,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/Computer/create',[ComputerController::class,'create']);
+Route::post('/Computer/store',[ComputerController::class,'store'])->name('Computer.store');
+
+Route::get('/TrainingCenter/create',[TrainingCenterController::class,'create']);
+Route::post('/TrainingCenter/store',[TrainingCenterController::class,'store'])->name('TrainingCenter.store');
+
+
+Route::get('/areas/create',[AreaController::class,'create']);
+Route::post('/areas/store',[AreaController::class,'store'])->name('areas.store');
+
+
