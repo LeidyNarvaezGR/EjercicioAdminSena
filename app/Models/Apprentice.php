@@ -17,13 +17,12 @@ class Apprentice extends Model
         'computer_id'
     ];
 
-    public function course()
-    {
-        return $this->belongsTo(Course::class);
+   public function Computer(){
+        return $this->belongsTo('App\Models\Computer');
     }
 
-    public function computer()
-    {
-        return $this->belongsTo(Computer::class);
+
+    public function Course(){
+        return $this->belongsTo('App\Models\Course');
     }
 }
