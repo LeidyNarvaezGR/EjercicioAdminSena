@@ -2,22 +2,46 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\TrainingCenter;
-
+use Illuminate\Http\Request;
 
 class TrainingCenterController extends Controller
 {
-     public function create() {
-        return view('TrainingCenter.create');
+    public function index()
+    {
+        return TrainingCenter::all();
     }
 
-    public function store(Request $request) {
-        $trainingcenter = new TrainingCenter();
-        $trainingcenter->name = $request->name;
-        $trainingcenter->location = $request->location;
-        $trainingcenter->save();
+    public function show(TrainingCenter $trainingCenter)
+    {
+        return response()->json($trainingCenter, 200);
+    }
 
-        return $trainingcenter;
+    public function store(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'location' => 'required|string|max:255'
+        ]);
+
+        $trainingCenter = TrainingCenter::create($request->all());
+        return response()->json($trainingCenter, 201);
+    }
+
+    public function update(Request $request, TrainingCenter $trainingCenter)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'location' => 'required|string|max:255'
+        ]);
+
+        $trainingCenter->update($request->all());
+        return response()->json($trainingCenter, 200);
+    }
+
+    public function destroy(TrainingCenter $trainingCenter)
+    {
+        $trainingCenter->delete();
+        return response()->json(['message' => 'Centro de formación eliminado correctamente'], 200);
     }
 }

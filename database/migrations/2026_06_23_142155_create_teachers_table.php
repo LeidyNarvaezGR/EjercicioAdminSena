@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('teachers', function (Blueprint $table) {
-             $table->id();
+            $table->id();
             $table->string('name');
             $table->string('email');
             $table->foreignId('area_id')->constrained('areas');
@@ -29,3 +29,4 @@ return new class extends Migration
         Schema::dropIfExists('teachers');
     }
 };
+ 

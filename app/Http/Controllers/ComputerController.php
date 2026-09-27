@@ -2,25 +2,49 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+
 use App\Models\Computer;
+use Illuminate\Http\Request;
 
 class ComputerController extends Controller
 {
-     public function create(){
+    public function index()
+    {
+        return Computer::all();
+    }
 
-    return view('Computer.create');
-
-     }
+    public function show(Computer $computer)
+    {
+        return response()->json($computer, 200);
+    }
 
     public function store(Request $request)
-{
-    $computer = new Computer();
-    $computer->number = $request->number;
-    $computer->brand = $request->brand;
-    $computer->save();
+    {
+        $request->validate([
+            'brand' => 'required|string|max:255',
+            'model' => 'required|string|max:255',
+            'serial_number' => 'required|string|unique:computers,serial_number'
+        ]);
 
-    return $computer;
+        $computer = Computer::create($request->all());
+        return response()->json($computer, 201);
+    }
 
-     }
+    public function update(Request $request, Computer $computer)
+    {
+        $request->validate([
+            'brand' => 'required|string|max:255',
+            'model' => 'required|string|max:255',
+            'serial_number' => 'required|string|unique:computers,serial_number,' . $computer->id
+        ]);
+
+        $computer->update($request->all());
+        return response()->json($computer, 200);
+    }
+
+    public function destroy(Computer $computer)
+    {
+        $computer->delete();
+        return response()->json(['message' => 'Computador eliminado correctamente'], 200);
+    }
 }
