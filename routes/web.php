@@ -25,7 +25,10 @@ Route::get('/TrainingCenter/create',[TrainingCenterController::class,'create']);
 Route::post('/TrainingCenter/store',[TrainingCenterController::class,'store'])->name('TrainingCenter.store');
 
 
-Route::get('/areas/create',[AreaController::class,'create']);
+Route::get('/areas',[AreaController::class,'webIndex'])->name('areas.index');
+Route::get('/areas/create',[AreaController::class,'create'])->name('areas.create');
 Route::post('/areas/store',[AreaController::class,'store'])->name('areas.store');
-
+Route::get('/areas/{area}/editar',[AreaController::class,'edit'])->name('areas.edit');
+Route::put('/areas/{area}',[AreaController::class,'update'])->name('areas.update');
+Route::delete('/areas/{area}',[AreaController::class,'destroy'])->name('areas.destroy');
 

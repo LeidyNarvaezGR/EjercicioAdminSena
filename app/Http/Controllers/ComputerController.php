@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\Models\Computer;
 use Illuminate\Http\Request;
 
+
 class ComputerController extends Controller
 {
     public function index()
@@ -21,12 +22,13 @@ class ComputerController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'number' => 'required|string|max:255',
             'brand' => 'required|string|max:255',
-            'model' => 'required|string|max:255',
-            'serial_number' => 'required|string|unique:computers,serial_number'
+            'serial_number' => 'required|string|unique:computers,serial_number',
         ]);
 
         $computer = Computer::create($request->all());
+
         return response()->json($computer, 201);
     }
 
@@ -47,4 +49,6 @@ class ComputerController extends Controller
         $computer->delete();
         return response()->json(['message' => 'Computador eliminado correctamente'], 200);
     }
+
+    
 }

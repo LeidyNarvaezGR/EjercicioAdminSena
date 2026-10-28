@@ -15,6 +15,7 @@ use App\Http\Controllers\TrainingCenterController;
 
 
 Route::get('areas', [AreaController::class, 'index']);
+Route::get('areas/{area}', [AreaController::class, 'show']);
 Route::post('areas', [AreaController::class, 'store']);
 Route::put('areas/{area}', [AreaController::class, 'update']);
 

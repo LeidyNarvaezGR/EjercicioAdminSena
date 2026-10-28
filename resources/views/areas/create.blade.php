@@ -2,22 +2,24 @@
 
 @section('content')
 
-<h1>Areas</h1>
+<h1>Nueva área</h1>
 
-<form action="{{route('areas.store')}}" method="POST" enctype="multipart/form-data">
+<form action="{{ route('areas.store') }}" method="POST" enctype="multipart/form-data">
 
-@csrf
+    @csrf
 
-<label>
-    Nombre:
-    <br>
-    <input type="text" name="name">
-</label>
-<br>
+    <div class="mb-3">
+        <label class="form-label">Nombre:</label>
+        <input type="text" name="name" class="form-control" required>
+    </div>
 
+    <div class="mb-3">
+        <label class="form-label">Imagen:</label>
+        <input type="file" name="imagen" class="form-control" accept="image/*">
+    </div>
 
+    <button type="submit" class="btn btn-primary">Crear área</button>
 
-<button type="submit">Crear:</button>
 </form>
 
 @endsection
